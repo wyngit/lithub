@@ -52,6 +52,10 @@ def github_listcomments():
 	print('response!: ' + r.text)
 	return redirect(url_for('index'))
 
+@app.route('/reviewdoc')
+def github_reviewdoc():
+	return render_template("reviewdoc.html")
+
 @app.route('/logout')
 def logout():
 	# remove the uid from the session
