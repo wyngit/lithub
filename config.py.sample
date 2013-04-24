@@ -1,0 +1,7 @@
+# Application Configuration
+DEBUG = False
+APP_SECRET_KEY='AAAABBBBCCCCDDDeeeFFFfgGGg'
+
+# Third-Party Service Configuration
+GITHUB_APP_ID = ''
+GITHUB_APP_SECRET = ''
