@@ -2,7 +2,13 @@ from flask import Flask, g, render_template, Response, redirect, url_for, flash,
 import config
 import requests
 import json
+import simplejson
+import base64
 import os
+import re
+from jinja2 import evalcontextfilter, Markup, escape
+
+_paragraph_re = re.compile(r'(?:\r\n|\r|\n){2,}')
 
 app = Flask(__name__)
 app.debug = config.DEBUG
@@ -54,7 +60,26 @@ def github_listcomments():
 
 @app.route('/reviewdoc')
 def github_reviewdoc():
-	return render_template("reviewdoc.html")
+	# get document
+	# /repos/:owner/:repo/contents/:path
+	r = requests.get('https://api.github.com/repos/davelester/drinkly/contents/README.md?access_token=cbc443a6402c0018a4c93a874b524862edab635d')
+	c = r.text
+	j = simplejson.loads(c)
+	git_url = j['git_url']
+	decoded_contents = base64.b64decode(j['content'])
+	
+	print('fulltext: ' + decoded_contents)
+	
+	return render_template("reviewdoc.html", fulltext=decoded_contents)
+
+@app.template_filter()
+@evalcontextfilter
+def nl2br(eval_ctx, value):
+	result = u'\n\n'.join(u'<p>%s</p>' % p.replace('\n', '<br>\n') \
+		for p in _paragraph_re.split(escape(value)))
+	if eval_ctx.autoescape:
+		result = Markup(result)
+	return result
 
 @app.route('/logout')
 def logout():
