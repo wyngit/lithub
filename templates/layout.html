@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Lithub</title>
+        <meta name="description" content="A web application for peer review using GitHub">
+        <meta name="author" content="Lisa Jervis, Hannah Krier, Dave Lester, and Weiyi Ng">
+        <meta name="robots" content="index,follow">
+
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+				<div class="container">
+				{% block body %}{% endblock %}
+				</div>
+				<footer>
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+				{% block scriptFooter %}{% endblock %}
+    </body>
+</html>

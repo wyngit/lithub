@@ -42,7 +42,7 @@ def github_authorized():
 	
 	# oauth_token = token_response['access_token']
 
-	return redirect(url_for('index'))
+	return redirect(url_for('github_reviewdoc'))
 
 @app.route('/comment')
 def github_comment():
