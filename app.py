@@ -55,8 +55,9 @@ def github_comment():
 @app.route('/listcomments')
 def github_listcomments():
 	r = requests.get('https://api.github.com/repos/davelester/drinkly/comments?access_token=cbc443a6402c0018a4c93a874b524862edab635d')
-	print('response!: ' + r.text)
-	return redirect(url_for('index'))
+	# print('response!: ' + r.text)
+	# return redirect(url_for('index'))
+        return r.text
 
 @app.route('/reviewdoc')
 def github_reviewdoc():
