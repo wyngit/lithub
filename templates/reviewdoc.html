@@ -3,6 +3,13 @@
 
 <h1>Review Document</h1>
 
-{{ fulltext | nl2br }}
+<div id="body-container">
+	<div id="text-container">
+		{{ fulltext | nl2br }}
+	</div>
+	<div id="comments">
+		<ul id="comments-list"></ul>
+	</div>
+</div>
 
 {% endblock %}
