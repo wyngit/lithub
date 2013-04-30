@@ -30,11 +30,11 @@ function setUpAuthors() {
 	
 	$('input:checkbox').change(function() {
    		authors[this.value] = this.checked;
-   		insertComments(authors);
+   		insertComments();
 	});
 }
 
-function insertComments(authorsList) {
+function insertComments() {
 	var newHtml = OLD_HTML;
 	$(comments).each(function () {
 		if (authors[this.user.login]) {
