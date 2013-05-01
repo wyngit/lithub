@@ -41,6 +41,8 @@ def github_authorized():
 	print('token_response: ' + r.text)
 	
 	# oauth_token = token_response['access_token']
+	
+	# session['oauth_token'] = token_response['access_token']
 
 	return redirect(url_for('github_reviewdoc'))
 
@@ -51,7 +53,7 @@ def github_comment():
 	comment = request.args.get('comment')
 	commit_id = "9f1de7185fe4c9ba582141314b1b8b07ae241044"
 
-	payload = {"body": comment, "commit_id": commit_id, "path": "testing.txt", "position": 22, "line": 1}
+	payload = {"body": comment, "commit_id": commit_id, "path": "testing.txt", "position": position, "line": line}
 	headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
 	r = requests.post('https://api.github.com/repos/davelester/testing/commits/'+commit_id+'/comments?access_token=cbc443a6402c0018a4c93a874b524862edab635d', data=json.dumps(payload), headers=headers)
 	print('response!: ' + r.text)
