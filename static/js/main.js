@@ -20,13 +20,13 @@ var comments = {};
 var authors = {};
 var authorColors = {};
 // right now only 6 colors (so up to 6 authors allowed)
-var colors = ['red', 'blue', 'green', 'yellow', 'magenta', 'cyan']; 
+var colors = ['nephritis', 'belize_hole', 'wisteria', 'green_sea', 'pomegranate']; 
 var OLD_HTML = $('#text-container').html();
 
 
 function setUpAuthors() {
 	$.each(authors, function (key, value) {
-		var authorString = '<label class="checkbox"><input type="checkbox" name="authors" checked="' + value + '" value="' + key + '">' + key + '</input></label>'
+		var authorString = '<label class="checkbox ' + authorColors[key] +'"><input type="checkbox" name="authors" checked="' + value + '" value="' + key + '">' + key + '</input></label>'
 		// var authorString = '<label class="checkbox"><input type="checkbox" checked="checked" value="">imaginary person</label>'
 		$('#comments').append(authorString);
 	});
@@ -41,7 +41,7 @@ function insertComments() {
 	var newHtml = OLD_HTML;
 	$(comments).each(function () {
 		if (authors[this.user.login]) {
-			var commentHtml = '<span class="' + authorColors[this.user.login] +'">' + this.body + '</span>';
+			var commentHtml = '<span class="' + authorColors[this.user.login] + '">' + this.body + '</span>';
 			if (this.position === null) {
 				newHtml += commentHtml;
 			} else {

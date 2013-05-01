@@ -22,28 +22,52 @@ h1 {
 	float: left;
 }
 
-.red {
-	color: red;
+.nephritis {
+	color: #27AE60;
 }
 
-.blue {
-	color: blue;
-} 
-
-.green {
-	color: green;
+.belize_hole {
+	color: #2980B9;
 }
 
-.yellow {
-	color: yellow;
-} 
+.pomegranate {
+	color: #C0392B;
+}
 
-.magenta {
-	color: magenta;
-} 
+.green_sea {
+	color: #16A085;
+}
 
-.cyan {
-	color: cyan;
+.wisteria {
+	color: #8E44AD;
+}
+
+.checkbox.nephritis,
+.checkbox.belize_hole,
+.checkbox.pomegranate,
+.checkbox.green_sea,
+.checkbox.wisteria {
+	color: #34495E
+}
+
+.checkbox.nephritis:hover {
+	color: #27AE60;
+}
+
+.checkbox.belize_hole:hover {
+	color: #2980B9;
+}
+
+.checkbox.pomegranate:hover {
+	color: #C0392B;
+}
+
+.checkbox.green_sea:hover {
+	color: #16A085;
+}
+
+.checkbox.wisteria:hover {
+	color: #8E44AD;
 }
 
 .bottom-buffer {
