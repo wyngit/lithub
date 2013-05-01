@@ -20,7 +20,7 @@ var comments = {};
 var authors = {};
 var authorColors = {};
 // right now only 6 colors (so up to 6 authors allowed)
-var colors = ['nephritis', 'belize_hole', 'wisteria', 'green_sea', 'pomegranate']; 
+var colors = ['nephritis', 'green_sea', 'wisteria', 'belize_hole', 'pomegranate']; 
 var OLD_HTML = $('#text-container').html();
 
 
