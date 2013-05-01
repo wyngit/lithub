@@ -70,6 +70,26 @@ h1 {
 	color: #8E44AD;
 }
 
+.nephritis .icon {
+	background: url(../images/checkbox_nephritis.png);
+}
+
+.belize_hole .icon {
+	background: url(../images/checkbox_belize_hole.png);
+}
+
+.pomegranate .icon {
+	background: url(../images/checkbox_pomegranate.png);
+}
+
+.green_sea .icon {
+	background: url(../images/checkbox_green_sea.png);
+}
+
+.wisteria .icon {
+	background: url(../images/checkbox_wisteria.png);
+}
+
 .bottom-buffer {
 	margin-bottom: 110px;
 }
