@@ -23,8 +23,8 @@ var OLD_HTML = $('#text-container').html();
 
 function setUpAuthors() {
 	$.each(authors, function (key, value) {
-		// var authorString = '<label class="checkbox"><input type="checkbox" name="authors" checked="' + value + '" value="' + key + '">' + key + '</input></label>'
-		var authorString = '<label class="checkbox"><input type="checkbox" checked="checked" value="">imaginary person</label>'
+		var authorString = '<label class="checkbox"><input type="checkbox" name="authors" checked="' + value + '" value="' + key + '">' + key + '</input></label>'
+		// var authorString = '<label class="checkbox"><input type="checkbox" checked="checked" value="">imaginary person</label>'
 		$('#comments').append(authorString);
 	});
 	
