@@ -1,8 +1,17 @@
 {% extends "layout.html" %}
 {% block body %}
 
-<h1>lithub is the best tool ever</h1>
+<div class="demo-headline">
+  <h1 class="demo-logo">
+    LitHub
+    <small>In-line review of GitHub Docs</small>
+  </h1>
+</div>
 
-<a href="/login">Login</a>
+<div class="row">
+	<div class="span4 offset4">
+		<a href="/login" class="btn btn-large btn-block btn-primary"><img src="{{ url_for('static', filename='images/GitHub-Mark-32px.png') }}" style="padding: 0px 15px;">Login Using GitHub</a>
+	</div>
+</div>
 
 {% endblock %}

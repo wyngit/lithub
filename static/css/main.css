@@ -3,7 +3,7 @@ h1 {
 }
 
 #body-container {
-	width: 70%;
+	width: 80%;
 	margin: 0 auto;
 }
 
@@ -44,4 +44,12 @@ h1 {
 
 .cyan {
 	color: cyan;
+}
+
+.bottom-buffer {
+	margin-bottom: 110px;
+}
+
+.footer {
+	padding: 50px 0 80px 0;
 }

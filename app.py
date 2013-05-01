@@ -73,6 +73,10 @@ def github_reviewdoc():
 	
 	return render_template("reviewdoc.html", fulltext=decoded_contents)
 
+@app.route('/test')
+def test():
+	return render_template("test.html")
+
 @app.template_filter()
 @evalcontextfilter
 def nl2br(eval_ctx, value):
