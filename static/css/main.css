@@ -3,16 +3,17 @@ h1 {
 }
 
 #body-container {
-	width: 80%;
+	width: 1100px;
 	margin: 0 auto;
 }
 
 #text-container {
 	height: 500px;
-	width: 500px;
+	width: 600px;
 	float: left;
 	border: 1px solid black;
 	margin-right: 30px;
+	padding: 20px;
 }
 
 #comments {
