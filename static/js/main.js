@@ -41,7 +41,7 @@ function insertComments() {
 	var newHtml = OLD_HTML;
 	$(comments).each(function () {
 		if (authors[this.user.login]) {
-			var commentHtml = '<span class="' + authorColors[this.user.login] + '">' + this.body + '</span>';
+			var commentHtml = '<span class="' + authorColors[this.user.login] + '"> ' + this.body + ' </span>';
 			if (this.position === null) {
 				newHtml += commentHtml;
 			} else {
