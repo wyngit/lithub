@@ -45,17 +45,17 @@ def github_authorized():
 	return redirect(url_for('github_reviewdoc'))
 
 @app.route('/comment/new')
-def github_comment(position, line, comment):
+def github_comment():
 	position = request.args.get('position')
 	line = request.args.get('line')
 	comment = request.args.get('comment')
-	commit_id = "4403fa0c64d57c45340fe694d7683f991131b7d4"
+	commit_id = "9f1de7185fe4c9ba582141314b1b8b07ae241044"
 
 	payload = {"body": comment, "commit_id": commit_id, "position": position, "line": line}
 	headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
-	r = requests.post('https://api.github.com/repos/davelester/drinkly/commits/'+commit_id+'/comments?access_token=cbc443a6402c0018a4c93a874b524862edab635d', data=json.dumps(payload), headers=headers)
+	r = requests.post('https://api.github.com/repos/davelester/testing/commits/'+commit_id+'/comments?access_token=cbc443a6402c0018a4c93a874b524862edab635d', data=json.dumps(payload), headers=headers)
 	print('response!: ' + r.text)
-	return redirect(url_for('index'))
+	return r.text
 
 @app.route('/listcomments')
 def github_listcomments():
