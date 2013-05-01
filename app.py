@@ -44,17 +44,22 @@ def github_authorized():
 
 	return redirect(url_for('github_reviewdoc'))
 
-@app.route('/comment')
+@app.route('/comment/new')
 def github_comment():
-	payload = {"body": "testing out the commenting feature", "commit_id": "4403fa0c64d57c45340fe694d7683f991131b7d4", "position": 20, "line": 2}
+	position = request.args.get('position')
+	line = request.args.get('line')
+	comment = request.args.get('comment')
+	commit_id = "9f1de7185fe4c9ba582141314b1b8b07ae241044"
+
+	payload = {"body": comment, "commit_id": commit_id, "path": "testing.txt", "position": 22, "line": 1}
 	headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
-	r = requests.post('https://api.github.com/repos/davelester/drinkly/commits/4403fa0c64d57c45340fe694d7683f991131b7d4/comments?access_token=cbc443a6402c0018a4c93a874b524862edab635d', data=json.dumps(payload), headers=headers)
+	r = requests.post('https://api.github.com/repos/davelester/testing/commits/'+commit_id+'/comments?access_token=cbc443a6402c0018a4c93a874b524862edab635d', data=json.dumps(payload), headers=headers)
 	print('response!: ' + r.text)
-	return redirect(url_for('index'))
+	return r.text
 
 @app.route('/listcomments')
 def github_listcomments():
-	r = requests.get('https://api.github.com/repos/davelester/drinkly/comments?access_token=cbc443a6402c0018a4c93a874b524862edab635d')
+	r = requests.get('https://api.github.com/repos/davelester/testing/comments?access_token=cbc443a6402c0018a4c93a874b524862edab635d')
 	# print('response!: ' + r.text)
 	# return redirect(url_for('index'))
         return r.text
@@ -63,7 +68,7 @@ def github_listcomments():
 def github_reviewdoc():
 	# get document
 	# /repos/:owner/:repo/contents/:path
-	r = requests.get('https://api.github.com/repos/davelester/drinkly/contents/README.md?access_token=cbc443a6402c0018a4c93a874b524862edab635d')
+	r = requests.get('https://api.github.com/repos/davelester/testing/contents/testing.txt?access_token=cbc443a6402c0018a4c93a874b524862edab635d')
 	c = r.text
 	j = simplejson.loads(c)
 	git_url = j['git_url']
