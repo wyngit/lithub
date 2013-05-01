@@ -10,7 +10,10 @@ $(document).ready(function() {
 		});
 		setUpAuthors();
 		insertComments(authors);
+		setUpCheckboxes();
    });
+   
+
 });
 
 var comments = {};
@@ -51,6 +54,18 @@ function insertComments() {
 
 function insertAtPosition(oldString, insertString, position) {
 	return [oldString.slice(0, position), insertString, oldString.slice(position)].join('');
+}
+
+function setUpCheckboxes() {
+	$("html").addClass("has-js");
+
+    // First let's prepend icons (needed for effects)
+    $(".checkbox, .radio").prepend("<span class='icon'></span><span class='icon-to-fade'></span>");
+
+    $(".checkbox, .radio").click(function(){
+        setupLabel();
+    });
+    setupLabel();
 }
 
 
