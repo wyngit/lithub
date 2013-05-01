@@ -12,14 +12,13 @@ h1 {
 	width: 500px;
 	float: left;
 	border: 1px solid black;
+	margin-right: 30px;
 }
 
 #comments {
 	width: 200px;
 	height: 500px;
-	border: 1px solid black;
 	float: left;
-	margin-left: 30px;
 }
 
 .red {

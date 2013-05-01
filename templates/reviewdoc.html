@@ -1,21 +1,27 @@
 {% extends "layout.html" %}
 {% block body %}
 
-<h1>Review Document</h1>
+<h1>LitHub</h1>
 
 <div id="body-container">
-	<div class="row">
 	<div id="text-container">
 		{{ fulltext | nl2br }}
 	</div>
 	<div id="comments">
-		<label class="checkbox">
-			<input type="checkbox" checked="checked" value="">
-			imaginary person
-		</label>
-		
-		<ul id="comments-list"></ul>
-	</div>
+		<div class="span5">
+			<div class="btn-toolbar">
+				<div class="btn-group">
+					<a href="#" class="btn btn-primary active">
+						<i class="fui-eye-24 span1"></i>
+					</a>
+					<a href="#" class="btn btn-primary">
+						<i class="fui-new-24 span1"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+		<h3>Reviewers</h3>
+		<label class="checkbox"><input type="checkbox" checked="checked" value="">imaginary person</label>
 	</div>
 </div>
 
