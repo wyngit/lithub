@@ -22,13 +22,6 @@ h1 {
 	float: left;
 }
 
-#insert-comments-popup {
-	width: 400px;
-	height: 300px;
-	margin: 0 auto;
-	display: none;
-}
-
 .nephritis {
 	color: #27AE60;
 }

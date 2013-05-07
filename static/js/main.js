@@ -1,37 +1,15 @@
 $(document).ready(function() {
    
-   $.getJSON('/listcomments', function(data) {
-       comments = data;
-       $(comments).each(function () {
-			if (authors[this.user.login] == undefined) {
-				authors[this.user.login] = true;
-				authorColors[this.user.login] = colors.pop();
-			}
-		});
-		setUpAuthors();
-		insertComments(authors);
-		setUpCheckboxes();
-   });
-   
+   getComments();
    
    // these next two event handlers control the toggles between edit mode and view mode in the
    // right column
    $('#edit-mode').on('click', function() {
-   		var newHtml = OLD_HTML.replace(/<(?:.|\n)*?>/gm, '');
-   		$('#text-container').replaceWith('<textarea id="text-container">' + newHtml + '</textarea>');
-   		$('#comments h3').hide();
-   		$('.checkbox').hide();
-   		$('#insert-comment').show();
-   		
-   		setUpInsertCommentsPopup();	
+   		switchToEditMode();
    });
    
    $('#view-mode').on('click', function() {
-   		$('#text-container').replaceWith('<div id="text-container">' + OLD_HTML + '</div>');
-   		insertComments();
-   		$('#insert-comment').hide();
-   		$('h3').show();
-   		$('.checkbox').show();
+   		switchToViewMode();
    });
    
 
@@ -44,12 +22,27 @@ var authorColors = {};
 var colors = ['nephritis', 'green_sea', 'wisteria', 'belize_hole', 'pomegranate']; 
 var OLD_HTML = $('#text-container').html();
 
+function getComments() {
+	$.getJSON('/listcomments', function(data) {
+       comments = data;
+       $(comments).each(function () {
+			if (authors[this.user.login] == undefined) {
+				authors[this.user.login] = true;
+				authorColors[this.user.login] = colors.pop();
+			}
+		});
+		setUpAuthors();
+		insertComments();
+		setUpCheckboxes();
+   });
+}
 
 function setUpAuthors() {
+	$('#checkboxes-container').html('');
 	$.each(authors, function (key, value) {
 		var authorString = '<label class="checkbox ' + authorColors[key] +'"><input type="checkbox" name="authors" checked="' + value + '" value="' + key + '">' + key + '</input></label>'
 		// var authorString = '<label class="checkbox"><input type="checkbox" checked="checked" value="">imaginary person</label>'
-		$('#comments').append(authorString);
+		$('#checkboxes-container').append(authorString);
 	});
 	
 	$('input:checkbox').change(function() {
@@ -91,12 +84,21 @@ function setUpCheckboxes() {
 
 function setUpInsertCommentsPopup() {
 	$('textarea').on('dblclick', function() {
-   		var charactersPerLine = 90; // this is just a rough estimate
-   		
-   		// get the cursor position (line number and position)
+   		var lines = OLD_HTML.split(/<\/?p>/);
+   		lines.shift();
    		var absoluteCursorPosition = this.selectionStart;
-   		var lineNumber = Math.ceil(absoluteCursorPosition / charactersPerLine);
-		var cursorPosition = absoluteCursorPosition % ((lineNumber - 1) * charactersPerLine);
+   		var lineNumber = 0;
+   		var tempCursorPosition = 0;
+   		
+   		console.log(lines);
+   		
+   		while (tempCursorPosition < absoluteCursorPosition) {
+   			console.log('lines['+lineNumber+'].length = ' + lines[lineNumber].length);
+   			tempCursorPosition += lines[lineNumber].length;
+   			lineNumber++;
+   		}
+   		
+   		var cursorPosition = absoluteCursorPosition - (tempCursorPosition - lines[lineNumber - 1].length);
    			
    		// fill in the fields of the popup with the line number and position
    		$('#add-comment-modal').modal('show');
@@ -113,13 +115,33 @@ function setUpInsertCommentsPopup() {
    	});
 }
 
+function switchToViewMode() {
+	$('#text-container').replaceWith('<div id="text-container">' + OLD_HTML + '</div>');
+   	insertComments();
+   	$('#insert-comment').hide();
+   	$('h3').show();
+   	$('.checkbox').show();
+}
+
+function switchToEditMode() {
+	var newHtml = OLD_HTML.replace(/<(?:.|\n)*?>/gm, '');
+   	$('#text-container').replaceWith('<textarea id="text-container">' + newHtml + '</textarea>');
+   	$('#comments h3').hide();
+   	$('.checkbox').hide();
+   	$('#insert-comment').show();
+   		
+   	setUpInsertCommentsPopup();
+}
+
 function saveComment(lineNum, position, comment) {
     var urlString = '/comment/new?comment=' + comment + '&position=' + position + '&line=' + lineNum; 
+  	console.log(urlString);
   	$.ajax({
 	    url: urlString,
 	    success: function() {
 	    	$('#add-comment-modal').modal('hide');
-	    	insertComments();
+	    	switchToViewMode();
+	    	getComments();
 	    }
   	});
 }
