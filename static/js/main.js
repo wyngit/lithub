@@ -13,6 +13,27 @@ $(document).ready(function() {
 		setUpCheckboxes();
    });
    
+   
+   // these next two event handlers control the toggles between edit mode and view mode in the
+   // right column
+   $('#edit-mode').on('click', function() {
+   		var newHtml = OLD_HTML.replace(/<(?:.|\n)*?>/gm, '');
+   		$('#text-container').replaceWith('<textarea id="text-container">' + newHtml + '</textarea>');
+   		$('#comments h3').hide();
+   		$('.checkbox').hide();
+   		$('#insert-comment').show();
+   		
+   		setUpInsertCommentsPopup();	
+   });
+   
+   $('#view-mode').on('click', function() {
+   		$('#text-container').replaceWith('<div id="text-container">' + OLD_HTML + '</div>');
+   		insertComments();
+   		$('#insert-comment').hide();
+   		$('h3').show();
+   		$('.checkbox').show();
+   });
+   
 
 });
 
@@ -67,5 +88,42 @@ function setUpCheckboxes() {
     });
     setupLabel();
 }
+
+function setUpInsertCommentsPopup() {
+	$('textarea').on('dblclick', function() {
+   		var charactersPerLine = 90; // this is just a rough estimate
+   		
+   		// get the cursor position (line number and position)
+   		var absoluteCursorPosition = this.selectionStart;
+   		var lineNumber = Math.ceil(absoluteCursorPosition / charactersPerLine);
+		var cursorPosition = absoluteCursorPosition % ((lineNumber - 1) * charactersPerLine);
+   			
+   		// fill in the fields of the popup with the line number and position
+   		$('#add-comment-modal').modal('show');
+   		$('#line-num').val(lineNumber);
+   		$('#position').val(cursorPosition);
+   	});
+   	
+   	// set up an event handler for saving comments
+   	$('#save-comment').on('click', function() {
+   		var lineNum = $('#line-num').val();
+   		var position = $('#position').val();
+   		var comment = $('#comment-text').val();
+   		saveComment(lineNum, position, comment);
+   	});
+}
+
+function saveComment(lineNum, position, comment) {
+    var urlString = '/comment/new?comment=' + comment + '&position=' + position + '&line=' + lineNum; 
+  	$.ajax({
+	    url: urlString,
+	    success: function() {
+	    	$('#add-comment-modal').modal('hide');
+	    	insertComments();
+	    }
+  	});
+}
+
+
 
 

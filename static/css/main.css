@@ -22,6 +22,13 @@ h1 {
 	float: left;
 }
 
+#insert-comments-popup {
+	width: 400px;
+	height: 300px;
+	margin: 0 auto;
+	display: none;
+}
+
 .nephritis {
 	color: #27AE60;
 }
@@ -96,4 +103,24 @@ h1 {
 
 .footer {
 	padding: 50px 0 80px 0;
+}
+
+#line-num,
+#position {
+	width: 40px;
+}
+
+#comment-text {
+	width: 430px;
+	height: 150px;
+}
+
+label[for="line-num"],
+label[for="position"] {
+	display: inline;
+	margin: 0 56px;
+}
+
+label[for="comment-text"] {
+	margin-top: 20px;
 }
