@@ -4,5 +4,4 @@ Werkzeug==0.8.3
 config
 distribute==0.6.27
 requests
-base64
 simplejson
