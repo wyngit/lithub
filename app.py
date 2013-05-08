@@ -37,12 +37,12 @@ def github_authorized():
 	
 	# # take the code, make a remote request to retrieve an access token
 	r = requests.post(access_token_url, params=payload)
-	# token_response = json.loads(r.text)
-	print('token_response: ' + r.text)
+	response_string = r.text
+	token_string = response_string.split('=')
+	token_string = token_string[1].split('&')
+	token_string = token_string[0]
 	
-	# oauth_token = token_response['access_token']
-	
-	# session['oauth_token'] = token_response['access_token']
+	session['oauth_token'] = token_string
 
 	return redirect(url_for('github_reviewdoc'))
 
@@ -61,7 +61,7 @@ def github_comment():
 
 @app.route('/listcomments')
 def github_listcomments():
-	r = requests.get('https://api.github.com/repos/davelester/testing/comments?access_token=cbc443a6402c0018a4c93a874b524862edab635d')
+	r = requests.get('https://api.github.com/repos/davelester/testing/comments?access_token='+session.get('oauth_token'))
 	# print('response!: ' + r.text)
 	# return redirect(url_for('index'))
         return r.text
@@ -70,7 +70,7 @@ def github_listcomments():
 def github_reviewdoc():
 	# get document
 	# /repos/:owner/:repo/contents/:path
-	r = requests.get('https://api.github.com/repos/davelester/testing/contents/testing.txt?access_token=cbc443a6402c0018a4c93a874b524862edab635d')
+	r = requests.get('https://api.github.com/repos/davelester/testing/contents/testing.txt?access_token='+session.get('oauth_token'))
 	c = r.text
 	j = simplejson.loads(c)
 	git_url = j['git_url']
