@@ -14,7 +14,7 @@ app = Flask(__name__)
 app.debug = config.DEBUG
 app.secret_key = config.APP_SECRET_KEY
 
-hostnamewithport='http://localhost:5000'
+hostnamewithport=config.BASE_URL
 request_token_url='https://github.com/login/oauth/authorize'
 access_token_url='https://github.com/login/oauth/access_token'
 authorize_url='https://github.com/login/oauth/authorize'

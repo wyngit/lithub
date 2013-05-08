@@ -1,6 +1,7 @@
 # Application Configuration
 DEBUG = False
 APP_SECRET_KEY='AAAABBBBCCCCDDDeeeFFFfgGGg'
+BASE_URL='http://localhost:5000'
 
 # Third-Party Service Configuration
 GITHUB_APP_ID = ''
