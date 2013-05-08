@@ -55,7 +55,7 @@ def github_comment():
 
 	payload = {"body": comment, "commit_id": commit_id, "path": "testing.txt", "position": position, "line": line}
 	headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
-	r = requests.post('https://api.github.com/repos/davelester/testing/commits/'+commit_id+'/comments?access_token=cbc443a6402c0018a4c93a874b524862edab635d', data=json.dumps(payload), headers=headers)
+	r = requests.post('https://api.github.com/repos/davelester/testing/commits/'+commit_id+'/comments?access_token='+session.get('oauth_token'), data=json.dumps(payload), headers=headers)
 	print('response!: ' + r.text)
 	return r.text
 
